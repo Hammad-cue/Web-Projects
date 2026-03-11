@@ -6,7 +6,7 @@ A sleek, responsive signup page built with **Node.js**, **Express**, and **EJS**
 
 ## 📸 Preview
 
-![Signup Form Screenshot](./screenshot.png)
+![Signup Form Screenshot](./image.png)
 
 
 ---
