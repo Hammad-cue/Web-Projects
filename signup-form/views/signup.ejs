@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .card {
+            border: none;
+            border-radius: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-primary {
+            background: #764ba2;
+            border: none;
+            padding: 0.8rem;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: #5e3a85;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-11 col-sm-8 col-md-6 col-lg-4">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-dark">Join Us</h2>
+                        <p class="text-muted">It's quick and easy.</p>
+                    </div>
+
+                    <form action="/signup" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="userInput" name="username" placeholder="Username" required>
+                            <label for="userInput">Username</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com" required>
+                            <label for="emailInput">Email address</label>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="passInput" name="password" placeholder="Password" required>
+                            <label for="passInput">Password</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill shadow-sm">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <small class="text-muted">Already have an account? <a href="#" class="text-decoration-none" style="color: #764ba2;">Log in</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
