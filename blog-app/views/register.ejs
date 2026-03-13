@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<section style="max-width: 400px; margin: 4rem auto 0 auto;">
+    <header style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: 2rem;">Join Qalam</h2>
+    </header>
+
+    <% if (errors && errors.length > 0) { %>
+        <div class="alert">
+            <ul style="margin: 0; padding-left: 1.2rem;">
+                <% errors.forEach(function(error) { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+
+    <form action="/register" method="POST">
+        <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="<%= formData.username || '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= formData.email || '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register</button>
+    </form>
+    
+    <p class="sans-text" style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+        Already have an account? <a href="/login" style="color: var(--text-heading);">Login here</a>
+    </p>
+</section>
+
+<%- include('partials/footer') %>

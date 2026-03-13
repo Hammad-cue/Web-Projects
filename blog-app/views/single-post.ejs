@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<article style="max-width: 720px; margin: 0 auto 5rem auto; padding-top: 2rem;">
+    <% if (post.image) { %>
+        <img src="<%= post.image %>" style="width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 6px; margin-bottom: 3rem; border: 1px solid var(--border-subtle);" alt="<%= post.title %>">
+    <% } %>
+
+    <header style="margin-bottom: 3rem; text-align: center;">
+        <h1 style="font-size: 3rem; letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.2;"><%= post.title %></h1>
+        <div class="sans-text" style="color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px;">
+            By <%= post.author.username %> &mdash; <%= post.createdAt.toDateString() %>
+        </div>
+    </header>
+
+    <div class="post-content" style="font-size: 1.15rem; line-height: 1.8;">
+        <%- post.content %>
+    </div>
+
+    <div style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 3rem;">
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+</article>
+
+<%- include('partials/footer') %>

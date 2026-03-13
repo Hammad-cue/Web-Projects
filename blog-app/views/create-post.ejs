@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<article style="max-width: 600px; margin: 0 auto;">
+    <header style="margin-bottom: 3rem;">
+        <h2 style="font-size: 2rem; letter-spacing: -0.5px;">New Draft</h2>
+    </header>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert"><%= error %></div>
+    <% } %>
+
+    <form id="postForm" action="/create-post" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required placeholder="The story begins...">
+        </div>
+
+        <div class="form-group">
+            <label for="image" class="form-label">Feature Image</label>
+            <input class="form-control" type="file" id="image" name="image" accept="image/*" style="padding: 0.5rem;">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Body</label>
+            <div id="editor-container" style="height: 350px; font-family: var(--font-serif); font-size: 1.1rem; background: transparent; border-color: var(--border-subtle);"></div>
+            <input type="hidden" name="content" id="hiddenContent">
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 3rem;">
+            <button type="submit" class="btn btn-primary">Publish</button>
+            <a href="/dashboard" class="btn">Discard</a>
+        </div>
+    </form>
+</article>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Write your thoughts...'
+    });
+
+    var form = document.getElementById('postForm');
+    form.onsubmit = function() {
+        var contentInput = document.getElementById('hiddenContent');
+        contentInput.value = quill.root.innerHTML;
+        
+        if (quill.getText().trim().length === 0) {
+            alert('Please add some content to your post.');
+            return false;
+        }
+    };
+</script>
+
+<%- include('partials/footer') %>

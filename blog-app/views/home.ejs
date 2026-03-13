@@ -1,0 +1,212 @@
+<%- include('partials/header') %>
+
+<style>
+    /* ---------------------------------------------------
+       PAGE-SPECIFIC OVERRIDES (Turns Header Transparent)
+       --------------------------------------------------- */
+    .site-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100; /* Puts the header on top of the image */
+        box-sizing: border-box;
+    }
+
+    /* Change navbar text to light colors to contrast against the dark overlay */
+    .nav-brand, .nav-links a {
+        color: #F4EFE6 !important; 
+    }
+    .nav-links a:hover {
+        color: #fff !important;
+    }
+
+    /* Remove the global container constraints specifically for the home page */
+    .main-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* ---------------------------------------------------
+       FULL-BLEED HERO SECTION
+       --------------------------------------------------- */
+    .hero-section {
+        position: relative;
+        background-image: url('https://images.unsplash.com/photo-1510936111840-65e151ad71bb?auto=format&fit=crop&w=2400&q=80');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100vh; /* Spans exactly 100% of the screen height */
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 6rem;
+    }
+
+    /* Dark overlay to make the white text readable */
+    .hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(to bottom, rgba(28, 25, 23, 0.6), rgba(28, 25, 23, 0.8));
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 2rem;
+        color: #F4EFE6;
+        max-width: 800px;
+        margin-top: 5rem; /* Pushes content down slightly so it doesn't hit the navbar */
+    }
+
+    .hero-title {
+        font-size: 5rem;
+        letter-spacing: -2px;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        color: #F4EFE6; 
+    }
+
+    .hero-subtitle {
+        font-family: var(--font-sans);
+        font-size: 1.35rem;
+        font-weight: 400;
+        margin-bottom: 3.5rem;
+        line-height: 1.6;
+        color: #D8D2C7;
+    }
+
+    /* Custom Buttons for the dark hero background */
+    .btn-hero-primary {
+        background-color: #F4EFE6;
+        color: #1C1917;
+        border-color: #F4EFE6;
+    }
+    .btn-hero-primary:hover {
+        background-color: #D8D2C7;
+        border-color: #D8D2C7;
+    }
+
+    .btn-hero-outline {
+        color: #F4EFE6;
+        border-color: #D8D2C7;
+    }
+    .btn-hero-outline:hover {
+        border-color: #F4EFE6;
+        background-color: rgba(244, 239, 230, 0.1);
+    }
+
+    /* ---------------------------------------------------
+       STAGGERED FEATURE LAYOUT
+       --------------------------------------------------- */
+    .feature-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 5rem;
+        max-width: 1000px;
+        margin: 0 auto 7rem auto;
+        padding: 0 2rem;
+    }
+
+    .feature-row.reverse {
+        flex-direction: row-reverse;
+    }
+
+    .feature-text {
+        flex: 1;
+        min-width: 320px;
+    }
+
+    .feature-text h2 {
+        font-size: 2.4rem;
+        letter-spacing: -1px;
+        margin-bottom: 1.2rem;
+        line-height: 1.2;
+    }
+
+    .feature-text p {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+    }
+
+    .feature-image {
+        flex: 1;
+        min-width: 320px;
+    }
+
+    .feature-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border: 1px solid var(--border-subtle);
+    }
+
+    /* Bottom Call to Action */
+    .bottom-cta {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+        padding: 6rem 2rem;
+        background-color: #EBE6DC;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+    }
+</style>
+
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">The written word,<br>refined.</h1>
+        <p class="hero-subtitle">
+            Qalam is a minimalist publishing platform designed to strip away the noise. Experience a serene, distraction-free environment built entirely for your ideas.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="/register" class="btn btn-hero-primary" style="font-size: 1.1rem; padding: 0.9rem 2.2rem;">Start Writing</a>
+            <a href="/about" class="btn btn-hero-outline" style="font-size: 1.1rem; padding: 0.9rem 2.2rem;">How it works</a>
+        </div>
+    </div>
+</section>
+
+<section class="feature-row">
+    <div class="feature-text">
+        <h2>A blank slate for your best ideas.</h2>
+        <p>Forget cluttered toolbars and overwhelming settings. Qalam utilizes a seamless WYSIWYG editor that gets out of your way, allowing you to format effortlessly and focus entirely on your narrative.</p>
+    </div>
+    <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80" alt="Minimalist notebook">
+    </div>
+</section>
+
+<section class="feature-row reverse">
+    <div class="feature-text">
+        <h2>Designed for the reader's eye.</h2>
+        <p>Every pixel of Qalam is engineered around Human-Computer Interaction principles. With carefully constrained line lengths, unbleached color palettes, and elegant serif typography, we dramatically reduce digital eye strain.</p>
+    </div>
+    <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" alt="Clean typography layout">
+    </div>
+</section>
+
+<section class="feature-row">
+    <div class="feature-text">
+        <h2>Robust backend architecture.</h2>
+        <p>Underneath the minimalist interface lies a powerful MVC engine. Built on Express and Node.js with secure MongoDB integration, your content is saved securely, rendered instantly, and managed seamlessly.</p>
+    </div>
+    <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80" alt="Code running on a screen">
+    </div>
+</section>
+
+<section class="bottom-cta">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.5px;">Ready to publish?</h2>
+    <p class="sans-text" style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem;">Join the platform built entirely for the love of writing.</p>
+    <a href="/register" class="btn btn-primary" style="font-size: 1.1rem; padding: 0.9rem 2.5rem;">Create your account</a>
+</section>
+
+<%- include('partials/footer') %>
