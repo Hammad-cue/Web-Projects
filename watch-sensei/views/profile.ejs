@@ -1,0 +1,154 @@
+<div class="row mb-4 align-items-center">
+  <div class="col-md-8">
+    <h2 class="fw-bold mb-0"><span style="color: var(--accent-crimson);">My</span> Stats Dashboard</h2>
+    <p class="text-light opacity-75 mt-2">Welcome back, <%= currentUser.username %>. Here is a breakdown of your watch habits.</p>
+  </div>
+  <div class="col-md-4 text-md-end mt-3 mt-md-0">
+    <select id="mediaFilter" class="form-select bg-dark text-light border-secondary shadow-sm" style="max-width: 200px; float: right;">
+      <option value="all">🍿 All Content</option>
+      <option value="movie">🎬 Movies Only</option>
+      <option value="tv">📺 TV & Anime Only</option>
+    </select>
+  </div>
+  <div class="col-12 mt-3"><hr class="border-secondary m-0"></div>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-5 d-flex flex-column gap-4">
+    <div class="card surface-element border border-secondary border-opacity-25 shadow-sm p-4 h-100 d-flex justify-content-center">
+      <h6 class="text-light opacity-75 text-uppercase fw-bold mb-2">Total Items in Queue</h6>
+      <h1 id="domTotalShows" class="display-3 fw-bold text-light mb-0"><%= totalShows %></h1>
+    </div>
+    <div class="card surface-element border border-secondary border-opacity-25 shadow-sm p-4 h-100 d-flex justify-content-center">
+      <h6 class="text-light opacity-75 text-uppercase fw-bold mb-2">Average Score Given</h6>
+      <div class="d-flex align-items-baseline gap-2">
+        <h1 id="domAvgRating" class="display-3 fw-bold mb-0" style="color: var(--accent-crimson);"><%= avgRating %></h1>
+        <span class="text-light opacity-50 fs-5">/ 10</span>
+      </div>
+      <small id="domTotalRated" class="text-light opacity-50 mt-2">Based on <%= totalRated %> rated items.</small>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="card surface-element border border-secondary border-opacity-25 shadow-sm p-4 h-100">
+      <h6 class="text-light opacity-75 text-uppercase fw-bold mb-4 text-center">Watchlist Breakdown</h6>
+      <div id="chartContainer" class="position-relative" style="height: 300px; width: 100%;">
+        <canvas id="statusChart"></canvas>
+      </div>
+      <p class="text-center small text-light opacity-50 mt-3 mb-0">💡 Click a slice to view items</p>
+    </div>
+  </div>
+</div>
+
+<div id="drillDownSection" class="row g-3 d-none mb-5 surface-element p-4 rounded border border-secondary border-opacity-25 shadow">
+  <div class="col-12 d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+    <h4 id="drillDownTitle" class="fw-bold mb-0" style="color: var(--accent-crimson);">Selected Items</h4>
+    <button id="closeDrillDown" class="btn btn-sm btn-outline-light">Close ✖</button>
+  </div>
+  <div id="drillDownGrid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3 w-100 m-0">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let donutChart;
+    const donutCtx = document.getElementById('statusChart').getContext('2d');
+
+    const initialLabels = JSON.parse('<%- chartLabels || "[]" %>');
+    const initialData = JSON.parse('<%- chartData || "[]" %>');
+
+    const statusColors = {
+      'Completed': '#e50914',
+      'Watching': '#f5c518',
+      'Plan to Watch': '#0d6efd',
+      'Dropped': '#6c757d'
+    };
+
+    function renderCharts(labels, data) {
+      if (donutChart) donutChart.destroy();
+
+      const bgColors = labels.map(label => statusColors[label] || '#ffffff');
+      
+      donutChart = new Chart(donutCtx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{ data: data, backgroundColor: bgColors, borderWidth: 0, hoverOffset: 6 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'right', labels: { color: '#ffffff', padding: 20 } } },
+          cutout: '70%',
+          onClick: async (event, elements) => {
+            if (elements.length > 0) {
+              const clickedIndex = elements[0].index;
+              const selectedStatus = donutChart.data.labels[clickedIndex];
+              fetchDrillDown(selectedStatus);
+            }
+          }
+        }
+      });
+    }
+
+    // --- API Fetch Functions ---
+
+    async function fetchUpdatedStats(type) {
+      const res = await fetch(`/profile/api/stats?type=${type}`);
+      const newData = await res.json();
+      
+      document.getElementById('domTotalShows').innerText = newData.totalShows;
+      document.getElementById('domAvgRating').innerText = newData.avgRating;
+      document.getElementById('domTotalRated').innerText = `Based on ${newData.totalRated} rated items.`;
+      
+      if (newData.totalShows > 0) {
+        renderCharts(newData.chartLabels, newData.chartData);
+      }
+    }
+
+    async function fetchDrillDown(status) {
+      const type = document.getElementById('mediaFilter').value;
+      const res = await fetch(`/profile/api/drilldown?status=${status}&type=${type}`);
+      const data = await res.json();
+
+      const grid = document.getElementById('drillDownGrid');
+      grid.innerHTML = ''; 
+      document.getElementById('drillDownTitle').innerText = `${status} Items`;
+
+      if (data.items && data.items.length > 0) {
+        data.items.forEach(item => {
+          grid.innerHTML += `
+            <div class="col">
+              <a href="/details/${item.mediaType}/${item.externalApiId}" class="text-decoration-none">
+                <img src="https://image.tmdb.org/t/p/w200${item.poster_url}" class="img-fluid rounded shadow-sm hover-zoom" alt="Poster">
+                <p class="text-light small mt-2 fw-bold text-truncate">${item.title}</p>
+              </a>
+            </div>
+          `;
+        });
+      }
+      
+      document.getElementById('drillDownSection').classList.remove('d-none');
+      document.getElementById('drillDownSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- Event Listeners ---
+    document.getElementById('mediaFilter').addEventListener('change', (e) => {
+      document.getElementById('drillDownSection').classList.add('d-none'); 
+      fetchUpdatedStats(e.target.value);
+    });
+
+    document.getElementById('closeDrillDown').addEventListener('click', () => {
+      document.getElementById('drillDownSection').classList.add('d-none');
+    });
+
+    // Initial Load
+    if (initialData.length > 0) renderCharts(initialLabels, initialData);
+  });
+</script>
+
+<style>
+  .hover-zoom { transition: transform 0.2s; }
+  .hover-zoom:hover { transform: scale(1.05); }
+</style>

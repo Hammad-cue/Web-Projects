@@ -130,4 +130,57 @@
       <% } %>
       </div>
   </div>
+
+  <% if (data.recommendations && data.recommendations.results && data.recommendations.results.length > 0) { %>
+    <div class="row mt-5 mb-5 pt-4 border-top border-secondary border-opacity-25">
+      <div class="col-12">
+        <h4 class="fw-bold mb-4 text-light">You Might Also Like</h4>
+        
+        <div class="d-flex flex-nowrap overflow-auto gap-3 pb-3 custom-scrollbar-hide" style="-webkit-overflow-scrolling: touch;">
+          
+          <% data.recommendations.results.forEach(item => { %>
+            <% if (item.poster_path) { %>
+              <div class="card bg-transparent border-0 flex-shrink-0" style="width: 160px;">
+                
+                <a href="/details/<%= item.media_type || type %>/<%= item.id %>" class="text-decoration-none">
+                  <div class="position-relative overflow-hidden rounded shadow-sm hover-zoom">
+                    <img src="https://image.tmdb.org/t/p/w200<%= item.poster_path %>" class="img-fluid w-100" alt="<%= item.title || item.name %>">
+                    
+                    <div class="position-absolute bottom-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                      <span class="badge bg-dark border border-secondary text-warning">
+                        ⭐ <%= item.vote_average ? item.vote_average.toFixed(1) : 'NR' %>
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <p class="text-light small mt-2 fw-bold text-truncate mb-0" title="<%= item.title || item.name %>">
+                    <%= item.title || item.name %>
+                  </p>
+                </a>
+
+              </div>
+            <% } %>
+          <% }) %>
+          
+        </div>
+      </div>
+    </div>
+  <% } %>
+
 <% } %>
+
+<style>
+  .custom-scrollbar-hide::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-scrollbar-hide::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar-hide::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .custom-scrollbar-hide:hover::-webkit-scrollbar-thumb {
+    background: rgba(229, 9, 20, 0.5); /* Faint crimson on hover */
+  }
+</style>

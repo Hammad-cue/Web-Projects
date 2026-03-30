@@ -8,12 +8,14 @@ const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 
+
 // Route Imports
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const searchRouter = require('./routes/search');
 const watchlistRouter = require('./routes/watchlist');
 const detailsRouter = require('./routes/details');
+const profileRouter = require('./routes/profile');
 
 const app = express();
 
@@ -77,6 +79,7 @@ app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/watchlist', watchlistRouter);
 app.use('/details', detailsRouter);
+app.use('/profile', profileRouter);
 
 /**
  * 7. ERROR HANDLING

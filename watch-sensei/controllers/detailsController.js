@@ -22,7 +22,7 @@ exports.getContentDetails = async (req, res) => {
     const tmdbResponse = await axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
       params: {
         api_key: tmdbKey,
-        append_to_response: 'videos,credits,external_ids,reviews'
+        append_to_response: 'videos,credits,external_ids,reviews,recommendations'
       }
     });
 
