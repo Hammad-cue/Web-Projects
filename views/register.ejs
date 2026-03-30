@@ -1,0 +1,37 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-4">
+    <div class="card surface-element p-4 rounded-3">
+      <h2 class="text-center mb-4 fw-bold">Join WatchSensei</h2>
+      
+      <% if (error) { %>
+        <div class="alert alert-danger py-2"><%= error %></div>
+      <% } %>
+
+     <form action="/auth/register" method="POST">
+        <div class="mb-3">
+          <label for="username" class="form-label">Choose a Username</label>
+          <input type="text" class="form-control bg-dark text-light border-secondary" 
+                 id="username" name="username" 
+                 minlength="3" maxlength="20" 
+                 pattern="^[a-zA-Z0-9_]+$" 
+                 title="Username must be 3-20 characters long and can only contain letters, numbers, and underscores."
+                 required>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label">Create a Password</label>
+          <input type="password" class="form-control bg-dark text-light border-secondary" 
+                 id="password" name="password" 
+                 minlength="6" 
+                 title="Password must be at least 6 characters long."
+                 required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 fw-bold">Register</button>
+      </form>
+      
+      <div class="text-center mt-3">
+        <span class="text-light opacity-75">Already have an account?</span> 
+        <a href="/auth/login" class="text-decoration-none" style="color: var(--accent-crimson);">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
