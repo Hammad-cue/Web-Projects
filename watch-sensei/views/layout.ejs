@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WatchSensei</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-charcoal: #121212;
+      --surface-card: #1E1E1E;
+      --text-main: #F8F9FA;
+      --accent-crimson: #E50914;
+    }
+
+    body {
+      background-color: var(--bg-charcoal);
+      color: var(--text-main);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Card Styling */
+    .card, .surface-element {
+      background-color: var(--surface-card);
+      border: none;
+      color: var(--text-main);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--accent-crimson);
+      border-color: var(--accent-crimson);
+      color: var(--text-main);
+    }
+    
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+      background-color: #b80710;
+      border-color: #b80710;
+    }
+
+    /* Navigation */
+    .navbar {
+      background-color: var(--surface-card);
+      border-bottom: 1px solid #333;
+    }
+    .navbar-brand, .nav-link {
+      color: var(--text-main) !important;
+    }
+    .nav-link:hover {
+      color: var(--accent-crimson) !important;
+    }
+
+    /* Main Content Wrapper */
+    main {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg mb-4 py-3">
+    <div class="container">
+      
+      <a class="navbar-brand fw-bold fs-4" href="/">
+        <span style="color: var(--accent-crimson);">Watch</span>Sensei
+      </a>
+      
+      <button class="navbar-toggler navbar-dark border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center gap-2">
+          <li class="nav-item"><a class="nav-link fs-6" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link fs-6" href="/search">Explore</a></li>
+          
+          <% if (currentUser) { %>
+            <li class="nav-item"><a class="nav-link fs-6" href="/watchlist">My Watchlist</a></li>
+            <li class="nav-item">
+              <span class="nav-link text-light opacity-75 ms-md-3 d-none d-lg-block">Hello, <%= currentUser.username %></span>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-danger btn-sm px-3 ms-lg-2 mt-2 mt-lg-0" href="/auth/logout">Logout</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item"><a class="nav-link fs-6" href="/auth/login">Login</a></li>
+            <li class="nav-item">
+              <a class="btn btn-primary btn-sm px-4 fw-bold shadow-sm mt-2 mt-lg-0" href="/auth/register">Sign Up</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="container">
+    <%- body %>
+  </main>
+
+  <footer class="text-center py-4 mt-auto">
+    <p class="text-muted small mb-0">&copy; 2026 WatchSensei. Mid-term Project.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
