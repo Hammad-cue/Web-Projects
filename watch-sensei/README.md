@@ -11,6 +11,8 @@ Users can discover trending content, view immersive media details, and manage pe
 ### 1. The Discovery Engine (Home Page)
 The landing page greets users with a dynamic carousel of daily trending content fetched live from the TMDB API, encouraging immediate engagement even before logging in.
 > <img src="https://github.com/user-attachments/assets/1c463d08-6c2a-4d16-a70c-68ec64d30f97" width="975" alt="Home Page">
+> <img src="https://github.com/user-attachments/assets/453b4080-4411-49eb-b509-761705f73085"width="975">
+
 
 ### 2. Live Search & Explore
 The Explore page utilizes URL query parameters to manage state. If the search bar is empty, it defaults to a paginated "Trending This Week" view. If a user searches, it queries the TMDB database for specific matches.
@@ -19,8 +21,9 @@ The Explore page utilizes URL query parameters to manage state. If the search ba
 ### 3. Immersive Details & Dual-API Mashup
 The Details page acts as a mini-IMDb. It dynamically renders a cinematic background, embeds a playable YouTube trailer, and performs a secondary API call to OMDB to fetch external critical consensus (Rotten Tomatoes, Metacritic).
 <p align="center">
-> <img src="https://github.com/user-attachments/assets/5edc2e20-d679-43a0-a8d6-a6c3467a9d24" width="468" alt="Details Page">
+<img src="https://github.com/user-attachments/assets/5edc2e20-d679-43a0-a8d6-a6c3467a9d24" width="468" alt="Details Page">
 </p>
+
 ### 4. Personalized Watchlist (CRUD Operations)
 Authenticated users have a private database array. The interface allows them to filter their list by status, update their progress via dropdowns, and remove items seamlessly.
 > <img src="https://github.com/user-attachments/assets/6f613159-b60e-48c2-a8a5-d9a9e878fa92" width="975" alt="Watchlist Page">
