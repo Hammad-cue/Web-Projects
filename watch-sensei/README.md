@@ -1,6 +1,47 @@
 # 🎬 WatchSensei
 
-**WatchSensei** is a full-stack, server-side rendered web application designed to be the ultimate companion for tracking movies and anime. Built as a midterm project, it features a custom "Midnight Cinema" dark-mode UI, secure user authentication, and a dual-API mashup that pulls live data from TMDB and OMDB.
+**WatchSensei** is a full-stack, server-side rendered (SSR) web application built to serve as a comprehensive tracker for movies and anime. Developed using an MVC (Model-View-Controller) architecture, the application integrates multiple external APIs (TMDB and OMDB) with a local MongoDB database to provide a seamless, dark-mode user experience. 
+
+Users can discover trending content, view immersive media details, and manage personalized watchlists with full CRUD (Create, Read, Update, Delete) functionality.
+
+---
+
+## 📸 Application Showcase & Modules
+
+### 1. The Discovery Engine (Home Page)
+The landing page greets users with a dynamic carousel of daily trending content fetched live from the TMDB API, encouraging immediate engagement even before logging in.
+> ![Home Page Screenshot](<img width="975" height="426" alt="image" src="https://github.com/user-attachments/assets/1c463d08-6c2a-4d16-a70c-68ec64d30f97" />
+)
+
+### 2. Live Search & Explore
+The Explore page utilizes URL query parameters to manage state. If the search bar is empty, it defaults to a paginated "Trending This Week" view. If a user searches, it queries the TMDB database for specific matches.
+> ![Explore Page Screenshot](<img width="975" height="442" alt="image" src="https://github.com/user-attachments/assets/2dbcf200-fd89-46aa-b3dc-26a85f4ff020" />
+)
+
+### 3. Immersive Details & Dual-API Mashup
+The Details page acts as a mini-IMDb. It dynamically renders a cinematic background, embeds a playable YouTube trailer, and performs a secondary API call to OMDB to fetch external critical consensus (Rotten Tomatoes, Metacritic).
+> ![Details Page Screenshot](<img width="468" height="1081" alt="image" src="https://github.com/user-attachments/assets/5edc2e20-d679-43a0-a8d6-a6c3467a9d24" />
+)
+
+### 4. Personalized Watchlist (CRUD Operations)
+Authenticated users have a private database array. The interface allows them to filter their list by status, update their progress via dropdowns, and remove items seamlessly.
+> ![Watchlist Page Screenshot](<img width="975" height="462" alt="image" src="https://github.com/user-attachments/assets/6f613159-b60e-48c2-a8a5-d9a9e878fa92" />
+)
+
+### 5. Dashboard Stats Module
+A dedicated analytical view providing users with insights into their viewing habits, including total titles completed, currently watching, and preferred genres.
+> ![Dashboard Stats Screenshot](<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/4257c1e4-428d-4bc7-8dd7-522ef0f2c25b" />
+)
+
+### 6. Secure Authentication & Input Validations
+Robust server-side checks ensure data integrity and security. The system enforces strict regex formatting (alphanumeric and underscores only, 3-20 characters) for usernames, a minimum password length of 6 characters, and checks for duplicate accounts.
+> ![Login Screen Screenshot](<img width="761" height="680" alt="image" src="https://github.com/user-attachments/assets/84406938-6d56-4278-8796-cce295c34b00" />
+)
+> *Above: User Login Interface.*
+
+> ![Register Validation Screenshot](<img width="1165" height="800" alt="image" src="https://github.com/user-attachments/assets/71fa2b7c-1afd-4cb6-a5df-fe779e358956" />
+)
+> *Above: Server-side validation errors displayed to the user (e.g., duplicate username, weak password).*
 
 ---
 
@@ -9,8 +50,9 @@
 * **Discovery Engine:** Displays a carousel of live "Trending Today" and "Trending This Week" content upon opening the app.
 * **Live Search:** Search the global TMDB database for millions of movies and anime.
 * **Dual-API Details Pages:** Immersive detail pages that display high-res backdrops, YouTube trailers, top cast, TMDB user reviews, and an API mashup fetching critical scores (Rotten Tomatoes, Metacritic, IMDb) from OMDB.
-* **Personalized Watchlist (CRUD):** Authenticated users can add items, update their watch status (Watching, Completed, Dropped), rate them out of 10, and delete them.
-* **Secure Authentication:** User passwords are securely hashed using `bcryptjs`, and sessions are managed via `express-session`.
+* **Personalized Watchlist (CRUD):** Authenticated users can add items, update their watch status (Watching, Completed, Dropped), rate them out of 10, and delete them. Database queries are strictly locked to the authenticated user's session ID.
+* **Dashboard Analytics:** Visual breakdown of watchlist statistics and user viewing metrics.
+* **Secure Authentication:** User passwords are securely hashed utilizing `bcryptjs` with a salt factor of 10 before saving to the MongoDB cluster, and sessions are managed via `express-session`.
 
 ---
 
@@ -20,7 +62,7 @@
 * **Backend:** Node.js, Express.js
 * **Database:** MongoDB, Mongoose (ODM)
 * **External APIs:** * [TMDB API](https://developer.themoviedb.org/docs) (Core movie/anime data, trailers, cast)
-    * [OMDB API](https://www.omdbapi.com/) (External ratings/badges)
+  * [OMDB API](https://www.omdbapi.com/) (External ratings/badges)
 
 ---
 
@@ -36,7 +78,7 @@ Follow these instructions to run WatchSensei on your local machine.
 ### Installation
 1.  **Clone or unzip the repository:**
     ```bash
-    git clone <repository-url>
+    git clone [https://github.com/Hammad-cue/Web-Projects/tree/main/watch-sensei](https://github.com/Hammad-cue/Web-Projects/tree/main/watch-sensei)
     cd watchsensei
     ```
 
@@ -83,13 +125,14 @@ WatchSensei follows an MVC (Model-View-Controller) architecture. Below is the do
 | `POST`| `/auth/login` | Authenticates user against hashed DB credentials. | Redirects to `/watchlist`|
 | `GET` | `/auth/logout` | Destroys the current user session. | Redirects to `/auth/login` |
 
-### 3. Watchlist Management (`/watchlist`) - *Requires Authentication*
+### 3. Watchlist & Dashboard Management - *Requires Authentication*
 | Method | Endpoint | Description | Response / Action |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/watchlist` | Fetches user's list. Accepts `?status=` query for filtering. | Renders `watchlist.ejs` |
 | `POST`| `/watchlist/add` | **Create:** Saves a new movie/anime to the user's DB. | Redirects to `/watchlist` |
 | `POST`| `/watchlist/update/:id`| **Update:** Modifies the watch status and rating of an item. | Redirects to `/watchlist` |
 | `POST`| `/watchlist/delete/:id`| **Delete:** Removes an item from the user's DB. | Redirects to `/watchlist` |
+| `GET` | `/dashboard` | Aggregates and displays user watchlist statistics. | Renders `dashboard.ejs` |
 
 ---
-*Developed for Midterm Project Assessment.*
+*Developed by Hammad Khawar (SP23-BSE-006) for Advanced Web Technologies, COMSATS University Islamabad Vehari.*
