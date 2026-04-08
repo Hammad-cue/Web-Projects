@@ -10,38 +10,35 @@ Users can discover trending content, view immersive media details, and manage pe
 
 ### 1. The Discovery Engine (Home Page)
 The landing page greets users with a dynamic carousel of daily trending content fetched live from the TMDB API, encouraging immediate engagement even before logging in.
-> ![Home Page Screenshot](<img width="975" height="426" alt="image" src="https://github.com/user-attachments/assets/1c463d08-6c2a-4d16-a70c-68ec64d30f97" />
-)
+> <img src="https://github.com/user-attachments/assets/1c463d08-6c2a-4d16-a70c-68ec64d30f97" width="975" alt="Home Page">
 
 ### 2. Live Search & Explore
 The Explore page utilizes URL query parameters to manage state. If the search bar is empty, it defaults to a paginated "Trending This Week" view. If a user searches, it queries the TMDB database for specific matches.
-> ![Explore Page Screenshot](<img width="975" height="442" alt="image" src="https://github.com/user-attachments/assets/2dbcf200-fd89-46aa-b3dc-26a85f4ff020" />
-)
+> <img src="https://github.com/user-attachments/assets/2dbcf200-fd89-46aa-b3dc-26a85f4ff020" width="975" alt="Explore Page">
 
 ### 3. Immersive Details & Dual-API Mashup
 The Details page acts as a mini-IMDb. It dynamically renders a cinematic background, embeds a playable YouTube trailer, and performs a secondary API call to OMDB to fetch external critical consensus (Rotten Tomatoes, Metacritic).
-> ![Details Page Screenshot](<img width="468" height="1081" alt="image" src="https://github.com/user-attachments/assets/5edc2e20-d679-43a0-a8d6-a6c3467a9d24" />
-)
-
+<p align="center">
+> <img src="https://github.com/user-attachments/assets/5edc2e20-d679-43a0-a8d6-a6c3467a9d24" width="468" alt="Details Page">
+</p>
 ### 4. Personalized Watchlist (CRUD Operations)
 Authenticated users have a private database array. The interface allows them to filter their list by status, update their progress via dropdowns, and remove items seamlessly.
-> ![Watchlist Page Screenshot](<img width="975" height="462" alt="image" src="https://github.com/user-attachments/assets/6f613159-b60e-48c2-a8a5-d9a9e878fa92" />
-)
+> <img src="https://github.com/user-attachments/assets/6f613159-b60e-48c2-a8a5-d9a9e878fa92" width="975" alt="Watchlist Page">
 
 ### 5. Dashboard Stats Module
 A dedicated analytical view providing users with insights into their viewing habits, including total titles completed, currently watching, and preferred genres.
-> ![Dashboard Stats Screenshot](<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/4257c1e4-428d-4bc7-8dd7-522ef0f2c25b" />
-)
+<img src="https://github.com/user-attachments/assets/4257c1e4-428d-4bc7-8dd7-522ef0f2c25b" width="975" alt="Dashboard Stats">
 
 ### 6. Secure Authentication & Input Validations
 Robust server-side checks ensure data integrity and security. The system enforces strict regex formatting (alphanumeric and underscores only, 3-20 characters) for usernames, a minimum password length of 6 characters, and checks for duplicate accounts.
-> ![Login Screen Screenshot](<img width="761" height="680" alt="image" src="https://github.com/user-attachments/assets/84406938-6d56-4278-8796-cce295c34b00" />
-)
-> *Above: User Login Interface.*
-
-> ![Register Validation Screenshot](<img width="1165" height="800" alt="image" src="https://github.com/user-attachments/assets/71fa2b7c-1afd-4cb6-a5df-fe779e358956" />
-)
-> *Above: Server-side validation errors displayed to the user (e.g., duplicate username, weak password).*
+<p align="center">
+<img src="https://github.com/user-attachments/assets/84406938-6d56-4278-8796-cce295c34b00" width="450" alt="Login Screen">
+</p> 
+Above: User Login Interface.
+<p align="center">
+<img src="https://github.com/user-attachments/assets/71fa2b7c-1afd-4cb6-a5df-fe779e358956" width="450" alt="Register Validation">
+</p> 
+Above: Server-side validation errors displayed to the user (e.g., duplicate username, weak password).
 
 ---
 
