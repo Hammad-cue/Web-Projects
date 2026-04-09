@@ -66,6 +66,49 @@ Above: Server-side validation errors displayed to the user (e.g., duplicate user
 
 ---
 
+## 📂 Project Structure
+
+WatchSensei follows a clean MVC (Model-View-Controller) architecture to separate business logic, data models, and user interfaces.
+
+```text
+WATCH-SENSEI/
+├── bin/                    # Executable scripts (e.g., server startup)
+├── controllers/            # Core business logic and request handling
+│   ├── authController.js
+│   ├── detailsController.js
+│   ├── profileController.js
+│   ├── searchController.js
+│   └── watchlistController.js
+├── middleware/             # Custom middleware functions
+│   └── authMiddleware.js   # Route protection and session verification
+├── models/                 # Mongoose database schemas
+│   ├── User.js
+│   └── WatchlistItem.js
+├── public/                 # Static assets (CSS, client-side JS, images)
+├── routes/                 # Express route definitions mapping URLs to controllers
+│   ├── auth.js
+│   ├── details.js
+│   ├── index.js
+│   ├── profile.js
+│   ├── search.js
+│   ├── users.js
+│   └── watchlist.js
+├── views/                  # EJS templates for server-side HTML rendering
+│   ├── details.ejs
+│   ├── error.ejs
+│   ├── index.ejs
+│   ├── layout.ejs
+│   ├── login.ejs
+│   ├── profile.ejs
+│   ├── register.ejs
+│   └── search.ejs
+├── .env                    # Environment variables (Ignored in Git)
+├── app.js                  # Main Express application setup and config
+├── package.json            # Project metadata and npm dependencies
+└── README.md               # Project documentation
+```
+---
+
 ## 🚀 Getting Started
 
 Follow these instructions to run WatchSensei on your local machine.
@@ -135,4 +178,5 @@ WatchSensei follows an MVC (Model-View-Controller) architecture. Below is the do
 | `GET` | `/dashboard` | Aggregates and displays user watchlist statistics. | Renders `dashboard.ejs` |
 
 ---
+
 *Developed by Hammad Khawar (SP23-BSE-006) for Advanced Web Technologies, COMSATS University Islamabad Vehari.*
