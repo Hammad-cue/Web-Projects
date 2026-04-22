@@ -63,6 +63,9 @@ Above: Server-side validation errors displayed to the user (e.g., duplicate user
 * **Database:** MongoDB, Mongoose (ODM)
 * **External APIs:** * [TMDB API](https://developer.themoviedb.org/docs) (Core movie/anime data, trailers, cast)
   * [OMDB API](https://www.omdbapi.com/) (External ratings/badges)
+ 
+ <img src="https://github.com/user-attachments/assets/4c5896b6-a0c6-4077-b8cd-4fe49950b6e8">
+
 
 ---
 
