@@ -1,0 +1,2307 @@
+/* ==========================================================================
+   WATCHSENSEI - REFINED MIDNIGHT CINEMA THEME
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-deep: #09090C;       /* Slightly richer black */
+  --bg-surface: #121218;    /* Darker, sleeker card surface */
+  --bg-input: #1A1A24;      /* Deep contrast for inputs */
+  --accent-red: #E50914;    
+  --accent-hover: #C10710;
+  --text-main: #F4F4F6;
+  --text-muted: #7A7A8C;    /* Softer gray for labels */
+  --border-light: rgba(255, 255, 255, 0.05);
+  
+  --shadow-card: 0 20px 40px -10px rgba(0, 0, 0, 0.8);
+  --glow-red: 0 0 0 2px rgba(229, 9, 20, 0.3); /* Tighter focus ring */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* --- Layout: Auth Pages --- */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #14141c 0%, #09090c 100%);
+  padding: 1.5rem;
+}
+
+/* 1. Force the container holding Login and Sign Up into a perfect row */
+.auth-actions {
+  display: flex !important;
+  align-items: center !important; /* This is the vertical centering magic */
+  gap: 1.5rem;
+  height: 100%;
+}
+
+/* 2. Strip any rogue margins or line-heights pushing them off-center */
+.auth-actions a,
+.auth-actions .btn-crimson {
+  margin: 0 !important;
+  display: flex;
+  align-items: center; /* Centers the text inside the elements themselves */
+  height: fit-content; 
+}
+
+/* UI/UX FIX 1: The Card Scale */
+/* Made the card narrower and reduced the massive padding for a compact, focused UI */
+.auth-card {
+  background-color: var(--bg-surface);
+  width: 100%;
+  max-width: 380px; 
+  padding: 2.5rem 2.5rem; 
+  border-radius: 12px; /* Sharper, modern corners */
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 2rem !important; 
+}
+
+/* UI/UX FIX 2: Group Spacing (Proximity Principle) */
+/* Brought the groups closer together so the eye flows naturally down the form */
+.mb-3, .mb-4 {
+  margin-bottom: 1.25rem !important; 
+}
+
+/* UI/UX FIX 3: Refined Labels */
+/* Smaller text, closer to the input so they clearly belong together */
+.form-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem; 
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+/* UI/UX FIX 4: Slimmer Inputs */
+/* Reduced the height and padding so they don't look like search bars */
+.custom-input {
+  width: 100%;
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  border-radius: 6px; /* Tighter corners */
+  padding: 0.7rem 1rem; 
+  font-size: 0.95rem; /* Slightly smaller text */
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: var(--accent-red);
+  background-color: #121218;
+  box-shadow: var(--glow-red);
+}
+
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* UI/UX FIX 5: Balanced Button */
+/* Shaved off the excess padding to match the slimmer inputs */
+.btn-crimson {
+  display: block;
+  width: 100%;
+  background-color: var(--accent-red);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.8rem; 
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-crimson:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4); /* Softer, tighter shadow */
+}
+
+.btn-crimson:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- Links & Small Text --- */
+a {
+  color: var(--accent-red);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: white;
+}
+
+p.text-center {
+  font-size: 0.85rem;
+  margin-top: 1.5rem !important;
+}
+
+/* --- Alerts --- */
+.alert-danger {
+  background-color: rgba(229, 9, 20, 0.08) !important;
+  color: #ff6b6b !important;
+  border: 1px solid rgba(229, 9, 20, 0.2) !important;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Navbar (Compact, Scalable & Animated) --- */
+/* ==========================================================================
+   NAVBAR (Natural Scroll)
+   ========================================================================== */
+.custom-navbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1.5rem 2.5rem; 
+  background: linear-gradient(to bottom, rgba(9, 9, 12, 0.95) 0%, rgba(9, 9, 12, 0) 100%);
+  
+  /* Absolute pins it to the top of the document, but lets it scroll out of view */
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Ensure pages have breathing room at the top so the absolute navbar doesn't cover content */
+.page-container {
+  padding-top: 100px !important; 
+}
+
+
+.navbar-brand {
+  justify-self: start; /* Locks to the far left */
+}
+
+.navbar-brand a {
+  font-size: 1.4rem; /* Slightly smaller for a premium feel */
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.navbar-links {
+  justify-self: center; /* Locks to the dead center */
+  display: flex;
+  gap: 1.5rem; /* Tighter gap so you can add more links later */
+}
+
+.nav-item {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8rem; /* Smaller text */
+  text-transform: uppercase;
+  letter-spacing: 0.5px; /* Tighter letter spacing to stop the "scattered" look */
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+/* The Animated Red Line */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-red);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateX(-50%);
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: var(--text-main);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+}
+
+/* --- User Section --- */
+.navbar-user {
+  justify-self: end; /* Locks to the far right */
+  display: flex;
+  align-items: center;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Tighter grouping */
+}
+
+.user-greeting {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 1rem;
+}
+
+.action-link {
+  color: var(--text-muted);
+  font-size: 0.75rem; /* Smaller, subtler utility links */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.action-link:hover {
+  color: var(--text-main);
+}
+
+.btn-logout {
+  background: rgba(229, 9, 20, 0.1);
+  color: var(--accent-red);
+  border: 1px solid rgba(229, 9, 20, 0.2);
+  padding: 0.35rem 0.8rem; /* Smaller, sleeker button */
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: var(--accent-red);
+  color: white;
+  box-shadow: var(--glow-red);
+}
+
+/* --- Page Layouts --- */
+.page-container {
+  padding: 2rem 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  /* THE FIX: Adds space at the top so content doesn't hide under the fixed navbar */
+  padding-top: 100px; 
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 1rem;
+  margin-bottom: 2rem !important;
+  border-left: 4px solid var(--accent-red);
+  padding-left: 1rem;
+}
+
+/* --- Search Bar --- */
+.search-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+.search-bar-wrapper {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input {
+  flex-grow: 1;
+  border-radius: 8px; /* Slightly rounder for the search bar */
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.search-btn {
+  margin-top: 0; /* Override the login button margin */
+  width: auto;
+  padding: 0 2rem;
+  border-radius: 8px;
+}
+
+/* --- Movie Grid --- */
+.movie-grid {
+  display: grid;
+  /* This creates a responsive grid. Posters will never be smaller than 200px wide */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.movie-card {
+  background-color: var(--bg-surface);
+  border-radius: 12px;
+  overflow: hidden; /* Keeps the image inside the rounded corners */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid var(--border-light);
+}
+
+.movie-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* Forces standard movie poster dimensions */
+  object-fit: cover;
+  display: block;
+}
+
+.poster-placeholder {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background-color: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds '...' if the title is too long */
+  margin-bottom: 0.2rem;
+}
+
+.movie-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* --- Watchlist Filters --- */
+.filter-icon {
+  color: var(--text-muted);
+}
+
+.filter-dropdown {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  appearance: auto; /* Keeps the native dropdown arrow */
+}
+
+.filter-dropdown option {
+  background: var(--bg-deep); /* Prevents white dropdown backgrounds */
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 1rem;
+  overflow-x: auto; /* Allows scrolling on small screens */
+}
+
+.filter-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+  background: var(--accent-red);
+  color: white;
+  box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+}
+
+.empty-state {
+  grid-column: 1 / -1; /* Spans the entire grid */
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px dashed var(--border-light);
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+/* 1. Make sure position is relative so the overlay stays inside the card */
+.movie-card {
+  background-color: var(--bg-surface);
+  border-radius: 12px;
+  overflow: hidden; 
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  border: 1px solid var(--border-light);
+  position: relative; /* REQUIRED FOR OVERLAY */
+}
+
+/* 2. The dark gradient overlay that sits on top of the poster */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 2 / 3; /* Matches the poster exactly */
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Invisible by default */
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+/* 3. Make it visible when you hover over the movie card */
+.movie-card:hover .card-overlay {
+  opacity: 1;
+}
+
+/* 4. The stylish Add button */
+.btn-add {
+  background-color: var(--accent-red);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transform: translateY(10px); /* Starts slightly lower */
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.movie-card:hover .btn-add {
+  transform: translateY(0); /* Slides up smoothly on hover */
+}
+
+.btn-add:hover {
+  background-color: var(--accent-hover);
+  box-shadow: var(--glow-red);
+}
+
+/* --- Updates to Movie Poster for Smooth Loading --- */
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  /* Adds a dark skeleton background while the image is loading */
+  background-color: var(--bg-input); 
+}
+
+/* --- Pagination Controls --- */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.btn-page {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-page:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-muted);
+}
+
+.btn-page:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* --- WATCHLIST GRID & CARDS --- */
+
+.watchlist-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.watchlist-filters {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.watchlist-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.watchlist-card:hover .watchlist-icon-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.watchlist-grid {
+  display: grid;
+  /* Shrinks the minimum card width to match smaller posters */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  gap: 2rem;
+}
+
+.watchlist-poster-container {
+  position: relative; /* Crucial for placing icons over the image */
+  width: 100%;
+}
+
+.watchlist-poster {
+  width: 100%;
+  height: 310px; /* INCREASED slightly from 280px */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: block; /* Removes weird image spacing bugs */
+}
+
+.watchlist-poster:hover {
+  transform: scale(1.05);
+}
+
+.watchlist-icon-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.watchlist-icon-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(-5px);
+  transition: all 0.2s ease;
+}
+
+/* --- WATCHLIST HEART OVERLAY --- */
+.watchlist-heart-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+}
+
+.btn-heart-glass {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-heart-glass:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.heart-beat {
+  animation: heartBeat 0.4s ease-in-out;
+}
+
+.watchlist-info {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.watchlist-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watchlist-display-mode {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Pushes everything to the bottom of the card */
+  margin-top: auto;
+}
+
+
+
+/* --- BADGES & RATINGS --- */
+
+.status-stack {
+  display: flex;
+  flex-direction: column; /* Stacks the tag and the stars */
+  align-items: flex-start;
+  gap: 0.5rem; /* Space between tag and stars */
+  margin-top: auto;
+}
+
+.status-badge {
+  margin-bottom: 0;
+}
+
+/* Static stars on the card */
+.display-stars {
+  display: flex;
+  gap: 0.15rem;
+  align-items: center;
+}
+
+/* --- INTERACTIVE STAR RATING (MODAL) --- */
+.interactive-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Creates a generous clickable area so the mouse tracks easily */
+.star-hitbox {
+  cursor: pointer;
+  padding: 0 2px;
+  transition: transform 0.1s ease;
+}
+
+.star-hitbox:hover .interactive-star-icon {
+  transform: scale(1.15); /* Slight pop when hovering */
+}
+
+.rating-number-preview {
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.user-rating {
+  font-size: 0.9rem;
+  color: #f1c40f; /* Gold color */
+  font-weight: 700;
+  margin-bottom: 0;
+}
+/* Color coding for the statuses */
+.status-plan-to-watch { background: rgba(255, 255, 255, 0.1); color: #ccc; }
+.status-watching { background: rgba(52, 152, 219, 0.2); color: #3498db; border: 1px solid #3498db; }
+.status-completed { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+.status-dropped { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+
+/* --- BUTTONS --- */
+.watchlist-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto; /* Pushes buttons to the bottom of the card */
+}
+
+.btn-icon-glass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6); /* Dark base */
+  backdrop-filter: blur(5px); /* Glassmorphism */
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+  transform: scale(1.1);
+}
+
+.btn-icon-glass.delete-icon:hover {
+  background: rgba(229, 9, 20, 0.8);
+  border-color: #e50914;
+}
+
+.btn-icon-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; /* Perfect circle */
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+.btn-icon-outline.delete-icon:hover {
+  background: rgba(229, 9, 20, 0.1);
+  color: #e50914;
+  border-color: #e50914;
+}
+
+.btn-edit, .btn-delete {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-edit:hover { background: rgba(255, 255, 255, 0.2); }
+
+.btn-delete {
+  background: transparent;
+  color: #e50914;
+  border: 1px solid rgba(229, 9, 20, 0.5);
+}
+
+.btn-delete:hover {
+  background: rgba(229, 9, 20, 0.1);
+  border-color: #e50914;
+}
+
+/* --- THE EDIT MODAL --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  background: var(--bg-deep); /* Use your app's background color */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: slideUpFade 0.3s ease;
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 15px; right: 15px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-close-modal:hover { color: white; }
+
+.modal-title {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: white;
+  padding-right: 20px; /* Space for close button */
+}
+
+.modal-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.modal-form-group label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-actions {
+  margin-top: 2rem;
+  display: flex;
+}
+
+.modal-actions .btn-save {
+  width: 100%;
+  padding: 0.8rem;
+}
+
+
+/* --- INLINE EDIT FORM --- */
+.watchlist-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.edit-select, .edit-number {
+  width: 100%;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 6px;
+}
+
+.rating-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.edit-number { width: 60px; }
+
+.edit-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-save, .btn-cancel {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-save {
+  background: #e50914;
+  color: white;
+  border: none;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================= */
+/* HOME WRAPPER & BACKGROUNDS                */
+/* ========================================= */
+.home-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 250px; /* How far down the shadow reaches */
+  background: linear-gradient(to bottom, rgba(7, 7, 10, 0.95) 0%, rgba(7, 7, 10, 0) 100%);
+  z-index: 1;
+  pointer-events: none; /* Ensures the shadow doesn't block you from clicking the navbar */
+}
+
+.home-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #07070a; /* Very deep space black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* The Faded Poster Wall */
+.home-bg-posters {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Replace this URL with an actual image of a movie poster collage if you have one! */
+  background-image: url('poster-bg.jpg'); 
+  background-size: cover;
+  background-position: center;
+  opacity: 0.20; /* Keeps it very faint */
+  z-index: 0;
+  /* This creates the dark vignette fade around the edges and bottom */
+  mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+}
+
+.ambient-glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ========================================= */
+/* HERO SECTION TYPOGRAPHY                   */
+/* ========================================= */
+.home-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  padding: 0 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-section {
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+  animation: slideUpFade 0.8s ease forwards;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: rgba(247, 247, 247, 0.8); /* Subtle gold/white tint */
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
+}
+
+/* ========================================= */
+/* BUTTON ACTIONS                            */
+/* ========================================= */
+.hero-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-massive {
+  padding: 0 2.5rem; /* Generous horizontal padding for a natural width */
+  min-height: 50px;
+  width: auto; /* Lets the text dictate the exact width */
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(229, 9, 20, 0.85); /* Deep red background */
+  border: 1px solid #e50914;
+  border-radius: 50px; /* Perfect pill shape */
+  color: white;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glow-effect {
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.btn-massive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 25px rgba(229, 9, 20, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn-ghost {
+  padding:  0 2rem; /* Slightly less padding than the main button */
+  min-height: 50px;
+  width: auto;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px; /* Perfect pill shape */
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+/* ========================================= */
+/* FEATURE GRID                              */
+/* ========================================= */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Forces 3 columns */
+  gap: 1.5rem;
+  width: 100%;
+  animation: slideUpFade 1s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+/* The Highlighted AI Sensei Card */
+.feature-card-highlight {
+  border: 1px solid rgba(229, 9, 20, 0.5); /* Red border */
+  background: linear-gradient(180deg, rgba(229, 9, 20, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  box-shadow: 0 10px 30px rgba(229, 9, 20, 0.1);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+/* Tiny footer text */
+.home-footer-text {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-actions {
+    flex-direction: column;
+  }
+  .btn-massive, .btn-ghost {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   USER AVATAR & NAVBAR UPDATES
+   ========================================================================== */
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-red) 0%, #700005 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+  border-color: white;
+  color: white;
+  box-shadow: 0 6px 15px rgba(229, 9, 20, 0.5);
+}
+
+
+/* ==========================================================================
+   PROFILE & SETTINGS PAGE
+   ========================================================================== */
+.settings-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  animation: slideUpFade 0.4s ease forwards;
+}
+
+.profile-header-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--bg-surface);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 2rem;
+}
+
+.avatar-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-red) 0%, #700005 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 2.5rem;
+  box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2);
+}
+
+.profile-username {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.2rem !important;
+  letter-spacing: -0.5px;
+}
+
+.profile-role {
+  color: var(--accent-red);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.settings-card {
+  background-color: var(--bg-surface);
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+}
+
+.settings-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.select-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%238E8E9F%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem top 50%;
+  background-size: 0.65rem auto;
+}
+
+.input-hint {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.btn-save {
+  width: auto;
+  padding: 0.8rem 2rem;
+}
+
+/* Danger Zone */
+.danger-zone {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px dashed rgba(229, 9, 20, 0.3);
+}
+
+.danger-zone h4 {
+  color: #ff4d4d;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.danger-zone p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-outline-danger {
+  background: transparent;
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-danger:hover {
+  background: rgba(255, 77, 77, 0.1);
+  border-color: #ff4d4d;
+}
+
+/* ==========================================================================
+   MODERN CINEMATIC DETAIL PAGE
+   ========================================================================== */
+.detail-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+}
+
+.detail-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85vh;
+  background-size: cover;
+  background-position: center 20%;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.backdrop-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, var(--bg-deep) 0%, rgba(9, 9, 12, 0.8) 60%, rgba(9, 9, 12, 0) 100%);
+}
+
+.detail-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px !important; 
+}
+
+.btn-back {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-back:hover { color: white; }
+
+/* --- Hero Section (Side-by-Side) --- */
+.detail-hero-section {
+  display: flex;
+  gap: 3.5rem;
+  align-items: flex-start;
+  margin-bottom: 4rem;
+  animation: slideUpFade 0.6s ease forwards;
+}
+
+/* Left Column: Poster */
+.detail-poster-container {
+  flex-shrink: 0;
+  width: 280px; 
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-poster-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smaller Buttons */
+.poster-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.btn-action-small, .btn-outline-play-small {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-action-small {
+  background-color: var(--accent-red);
+  color: white;
+  border: none;
+}
+.btn-action-small:hover { background-color: var(--accent-hover); }
+
+.btn-outline-play-small {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.btn-outline-play-small:hover { background: white; color: black; }
+
+/* Right Column: Info */
+.detail-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 1rem;
+}
+
+.hero-movie-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.hero-tagline {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.meta-year { color: white; font-weight: 600;}
+.meta-dot { font-size: 0.8rem; opacity: 0.5; }
+.hero-genres-inline { font-weight: 500; }
+
+/* Seamless Synopsis */
+.hero-overview-integrated {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 800px;
+  margin-bottom: 2.5rem;
+}
+
+/* Minimal Ratings */
+.minimal-ratings-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.rating-aesthetic {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.rating-aesthetic-val {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white;
+}
+.rating-aesthetic-src {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* --- Cast Section (Avatars) --- */
+.cast-section {
+  margin-bottom: 3rem;
+}
+
+.section-heading-subtle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.5rem;
+}
+
+.cast-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.cast-avatar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  text-align: center;
+}
+
+.cast-avatar-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  background: var(--bg-input);
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.cast-avatar-card:hover .cast-avatar-img {
+  border-color: var(--accent-red);
+}
+
+.cast-avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-input);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.cast-avatar-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+}
+
+.cast-avatar-role {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.1;
+}
+
+/* --- Minimal Reviews --- */
+.reviews-minimal-section {
+  margin-bottom: 4rem;
+}
+
+.reviews-minimal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-minimal-card {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.review-minimal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+.review-author-name { font-weight: 700; color: white; font-size: 0.95rem;}
+.review-rating-star { color: #FFD700; font-size: 0.85rem; font-weight: 600;}
+
+.review-minimal-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* --- Similar Movies (Arrows, Custom Red Scrollbar) --- */
+.similar-section-modern {
+  margin-bottom: 4rem;
+}
+
+.similar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.similar-nav-arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-arrow {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.nav-arrow:hover { background: var(--accent-red); border-color: transparent;}
+
+.nav-arrow-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevents hover effects from triggering */
+} 
+
+.similar-scroll-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1.5rem; /* Space for the scrollbar */
+  scroll-behavior: smooth;
+}
+
+.similar-card-modern {
+  flex: 0 0 150px;
+  width: 150px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.similar-card-modern:hover { opacity: 0.8; }
+
+.similar-img-wrapper {
+  width: 150px;
+  height: 225px; /* Fixed aspect ratio (2:3) */
+  margin-bottom: 0.8rem;
+  background-color: var(--bg-input); 
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.similar-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block;
+}
+
+.similar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.similar-title-modern {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;         /* Hides text that overflows the box */
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+}
+
+/* THE CUSTOM RED SCROLLBAR */
+/* --- Hide Scrollbar for Similar Movies --- */
+.similar-scroll-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem; /* Reduced padding since there's no scrollbar */
+  scroll-behavior: smooth;
+  
+  /* Firefox */
+  scrollbar-width: none; 
+  /* IE and Edge */
+  -ms-overflow-style: none;  
+}
+
+/* Chrome, Safari and Opera */
+.similar-scroll-container::-webkit-scrollbar {
+  display: none; 
+}
+
+/* --- Cinematic Trailer Modal --- */
+.trailer-modal-cinematic {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px); /* Heavy cinematic blur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.trailer-content-wrapper {
+  position: relative;
+  width: 90%;
+  max-width: 950px;
+  background: black;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+}
+
+.btn-close-cinematic {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.btn-close-cinematic:hover { background: var(--accent-red); }
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%; 
+  position: relative;
+  height: 0;
+}
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .detail-hero-section { flex-direction: column; align-items: center; }
+  .detail-poster-container { width: 240px; }
+  .detail-info-container { align-items: center; text-align: center;}
+  .hero-movie-title { text-align: center; }
+  .hero-meta, .hero-genres-inline, .minimal-ratings-group { justify-content: center; }
+  .hero-overview-integrated, .section-heading-subtle { text-align: center; }
+  .cast-grid { justify-content: center; }
+}
+
+/* ==========================================================================
+   AI RECOMMENDATION PAGE (PREMIUM UI)
+   ========================================================================== */
+.recommend-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Ambient Background Glows */
+.recommend-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.15;
+}
+.glow-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: var(--accent-red);
+}
+.glow-2 {
+  bottom: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: #4a0000;
+}
+
+.recommend-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+/* Intro Screen */
+.recommend-hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #fff, #aaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.recommend-hero-subtitle {
+
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recommend-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch; /* This is the magic bullet */
+}
+
+/* 2. The Buttons: Strip padding and use Flexbox to center the text */
+.btn-action-large {
+  margin: 0; /* Kill any secret margins */
+  padding: 0 2.5rem; /* Kill vertical padding so it doesn't fight the height */
+  min-height: 60px; /* Set a strict minimum height */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1; 
+  max-width: 250px; 
+  text-align: center;
+  
+  border: 1px solid transparent; 
+  box-sizing: border-box;
+}
+
+.btn-outline-play {
+  background: rgba(255, 255, 255, 0.05); 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+  color: white; 
+  backdrop-filter: blur(10px); 
+}
+
+.btn-outline-play:hover {
+  background: rgba(255, 255, 255, 0.15); 
+  border-color: white; 
+  color: white;
+}
+/* --- NEW: Poster Dossier Layout --- */
+.ai-dossier-card.has-poster {
+  display: flex;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid var(--accent-red);
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, background 0.2s ease;
+  text-decoration: none; /* Important for the Link wrapper */
+  color: inherit;
+}
+
+.ai-dossier-card.has-poster:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.dossier-poster-container {
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.dossier-poster {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+.dossier-poster-placeholder {
+  width: 100%;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.dossier-info-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quiz Screen */
+.quiz-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--accent-red);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quiz-step-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 3rem;
+}
+
+.quiz-question-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.quiz-glass-btn {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 2rem 1.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+.quiz-glass-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-red);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px -10px rgba(229, 9, 20, 0.3); /* Subtle red glow */
+}
+
+/* Loading Screen */
+.ai-pulse-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent-red);
+  margin: 0 auto 2.5rem auto;
+  animation: spin 1s linear infinite, pulseGlow 2s ease-in-out infinite;
+}
+
+.loading-title { font-size: 2rem; margin-bottom: 0.5rem; }
+.loading-subtitle { color: var(--text-muted); }
+
+@keyframes pulseGlow { 
+  0% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(229, 9, 20, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+}
+
+/* Results Dossier Grid */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 1.5rem;
+}
+
+.results-hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.results-dossier-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.ai-dossier-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid var(--accent-red);
+  padding: 2rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.ai-dossier-card:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dossier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.dossier-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.5px;
+}
+
+.dossier-year {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.dossier-badge {
+  background: rgba(229, 9, 20, 0.15);
+  color: #ff4d4d;
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.dossier-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-red);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.dossier-reason {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+}
+
+/* Animations */
+.animate-fade-in { animation: fadeInUp 0.5s ease forwards; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .recommend-actions { 
+    flex-direction: column; 
+  }
+  .btn-action-large { 
+    width: 100%; 
+    max-width: 100%; 
+  }
+  .ai-dossier-card.has-poster { 
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+  }
+  .dossier-header { 
+    flex-direction: column; 
+    gap: 1rem; 
+    align-items: center;
+  }
+  .dossier-poster-container {
+    width: 150px; /* Slightly larger poster on mobile */
+  }
+}
+
+/* --- Streaming Providers --- */
+.streaming-providers-section {
+  margin-top: 0.5rem; /* Drastically reduced to pull it up */
+  margin-bottom: 2rem; 
+  padding-top: 0; /* Removed padding since the text title is gone */
+  border-top: none; /* Kills the awkward second divider line */
+}
+
+.providers-title {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.providers-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px; /* Adds space between the logos */
+  align-items: center;
+}
+
+.provider-logo {
+  width: 50px; /* Forces the giant image to become a small app icon */
+  height: 50px;
+  border-radius: 12px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: cover;
+}
+
+.provider-logo:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
+}
+
+/* ========================================= */
+/* THE NUCLEAR BUTTON ALIGNMENT FIX          */
+/* ========================================= */
+
+.hero-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  align-items: center !important; 
+}
+
+/* This specifically targets the links inside hero-actions to strip bad spacing */
+.hero-actions a {
+  margin: 0 !important; /* Kills the rogue margin pushing it out of line */
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important; /* Perfect vertical text centering */
+  justify-content: center !important;
+  height: 50px !important; /* Forces them to be the exact same height */
+}
