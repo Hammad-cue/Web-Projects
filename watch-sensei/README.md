@@ -10,15 +10,19 @@ WatchSensei is a premium, full-stack, AI-powered cinematic discovery and trackin
 
 ### 🏠 Home — Cinematic Hero
 The landing page features a dynamic collage of classic film posters as a live background, overlaid with a deep vignette mask and red ambient glow effects. Authenticated users see a **"Go to My Dashboard"** CTA instead of Sign Up / Sign In.
-
-![Home Page](img width="468" alt="localhost_5173-frontend-fpscreenshot (3)" src="https://github.com/user-attachments/assets/c7167c54-ebf8-42a5-a895-efc7cb082650")
+<p align="center"> 
+<img width="468"  alt="localhost_5173-frontend-fpscreenshot (3)" src="https://github.com/user-attachments/assets/fc8f9664-ca45-4cda-a647-dc583d6feb56" />
+</p>
 
 ---
 
 ### 🔍 Discover — Live Trending + Cross-Reference Engine
 The Discover page fetches **live weekly trending** data from TMDB and displays it as a responsive poster grid. It simultaneously loads the user's watchlist into an in-memory dictionary for O(1) lookups. Cards already in the user's library display a disabled **"✓ In Watchlist"** button instead of the add action. A persistent **Heart** icon on every card saves a `liked` flag directly to MongoDB via a `PUT` request.
 
-![Discover Page](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/discover.png)
+<p align="center"> 
+<img width="468"  alt="Screenshot 2026-06-15 060749" src="https://github.com/user-attachments/assets/86ecbd08-527a-46c9-950d-cb773512f199" />
+
+</p>
 
 ---
 
@@ -31,7 +35,10 @@ Each media page is a fully immersive experience:
 - **YouTube Trailer** embed in a full-screen modal overlay
 - **"More Like This"** — horizontally scrolling carousel with mathematical edge-detection to dynamically enable/disable nav arrows at scroll boundaries
 
-![Detail Page](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/detail.png)
+<p align="center"> 
+<img width="468" alt="localhost_5173-frontend-fpscreenshot (5)" src="https://github.com/user-attachments/assets/7bfbf320-576e-4098-b534-9bf36b212273" />
+
+</p>
 
 ---
 
@@ -46,9 +53,18 @@ The flagship feature. Users either complete a **3-question mood quiz** or hit **
 
 The timestamp injection in Surprise Me guarantees non-repetitive results across every call.
 
-![Ask Sensei Landing](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/sensei_landing.png)
-![Ask Sensei Quiz](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/sensei_quiz.png)
-![Ask Sensei Results](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/sensei_results.png)
+<p align="center"> 
+<img width="468" alt="Screenshot 2026-06-13 082213" src="https://github.com/user-attachments/assets/57ea9315-a689-4fde-af18-f13f09b83cab" />
+
+</p>
+<p align="center"> 
+<img width="468" alt="Screenshot 2026-06-13 082229" src="https://github.com/user-attachments/assets/f91ec726-2a26-4cc4-bfbc-141d78a285d3" />
+
+</p>
+<p align="center"> 
+<img width="468"  alt="localhost_5173-frontend-fpscreenshot (2)" src="https://github.com/user-attachments/assets/ca91c1c0-b0a4-4f64-ad3a-59afb8712612" />
+
+</p>
 
 ---
 
@@ -82,14 +98,17 @@ A protected route accessible only to authenticated users. Exposes:
 - **Account Settings** — update email and configure **Sensei AI Strictness** (Balanced / Strict / Adventurous), which adjusts how the LLM filters recommendations
 - **Danger Zone** — permanent account and watchlist deletion
 
-![Profile Page](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/profile.png)
+<p align="center"> 
+<img width="468" alt="localhost_5173-frontend-fpscreenshot (6)" src="https://github.com/user-attachments/assets/9d693fdb-b508-4d51-81d2-4a6c556b3326" />
+
+</p>
 
 ---
 
 ### 🔐 Authentication
 Session-based auth using `express-session` and `cookie-parser`. Login sets an `HttpOnly` session cookie. All protected API endpoints check `req.session.user` before responding. A `<ProtectedRoute>` wrapper in `App.jsx` redirects unauthenticated React Router navigations to `/login` instantly.
 
-![Login Page](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/login.png)
+
 
 ---
 
