@@ -11,7 +11,8 @@ WatchSensei is a premium, full-stack, AI-powered cinematic discovery and trackin
 ### 🏠 Home — Cinematic Hero
 The landing page features a dynamic collage of classic film posters as a live background, overlaid with a deep vignette mask and red ambient glow effects. Authenticated users see a **"Go to My Dashboard"** CTA instead of Sign Up / Sign In.
 
-![Home Page](https://github.com/Hammad-cue/Web-Projects/assets/placeholder/home.png)
+![Home Page](<img width="468" alt="localhost_5173-frontend-fpscreenshot (3)" src="https://github.com/user-attachments/assets/c7167c54-ebf8-42a5-a895-efc7cb082650" />
+)
 
 ---
 
