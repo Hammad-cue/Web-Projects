@@ -253,7 +253,7 @@ watchlistItemSchema.index({ user: 1, externalApiId: 1 }, { unique: true });
 ### Media Details (`/api/details`)
 | Method | Endpoint | Description | Params |
 |--------|----------|-------------|--------|
-| `GET` | `/api/details/:type/:id` | Aggregated details: metadata, cast, trailers, providers, similar titles, OMDB scores | `type` = movie/tv · `id` = TMDB ID |
+| `GET` | `/api/media/:type/:id` | Aggregated details: metadata, cast, trailers, providers, similar titles, OMDB scores | `type` = movie/tv · `id` = TMDB ID |
 
 ### AI Recommendations (`/api/recommend`)
 | Method | Endpoint | Description | Body |
